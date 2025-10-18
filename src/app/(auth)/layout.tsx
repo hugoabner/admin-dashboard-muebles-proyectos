@@ -12,9 +12,9 @@ export default function LayoutAuth({
         className="fixed top-0 flex items-center bg-background 
         border-b h-16 w-full mx-auto justify-between px-4 shadow-xs"
       >
-        <Button variant={"destructive"}>Como</Button>
+        <Button variant={"destructive"}>SignIn</Button>
       </nav>
-        {children}
+      {children}
     </main>
   );
 }
