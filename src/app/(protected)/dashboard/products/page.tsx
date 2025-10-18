@@ -19,7 +19,7 @@ async function getProductos(searchParams: Props) {
   });
 
   // Usar la API local en lugar de una externa
-  const baseUrl = "http://localhost:3000";
+  const baseUrl = "https://dashboard-muebles-proyectos.vercel.app";
   const res = await fetch(`${baseUrl}/api/products?${params}`, {
     cache: "no-store",
   });
