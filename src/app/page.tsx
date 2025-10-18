@@ -10,7 +10,7 @@ export default function Page() {
     toast.error("Error");
   }
   const handleWarning = () => {
-    toast.warning("Warning");
+    toast.info("Warning");
   }
   return (
     <main className="min-h-screen bg-gradient-to-br from-background to-muted p-8">

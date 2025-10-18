@@ -1,2 +1,2 @@
-export { default as NavbarMain } from "./input-custom";
+export { Input } from "./input-custom";
 
