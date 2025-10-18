@@ -106,10 +106,10 @@ export default function SignInPage() {
   return (
     <div 
       className="min-h-screen flex items-center 
-      justify-center bg-gray-50"
+      justify-center bg-gray-50 px-3 "
     >
       <div 
-        className="max-w-md w-full space-y-6 p-8 
+        className="max-w-md w-full space-y-6 p-5 md:p-8 
       bg-white rounded-lg shadow-md"
       >
         <h2 className="text-2xl font-bold text-center">
