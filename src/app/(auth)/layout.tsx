@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import React from "react";
 
 export default function LayoutAuth({
@@ -12,7 +11,7 @@ export default function LayoutAuth({
         className="fixed top-0 flex items-center bg-background 
         border-b h-16 w-full mx-auto justify-between px-4 shadow-xs"
       >
-        <Button variant={"destructive"}>SignIn</Button>
+        Logo
       </nav>
       {children}
     </main>
