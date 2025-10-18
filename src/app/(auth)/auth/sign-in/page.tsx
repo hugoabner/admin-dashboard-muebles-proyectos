@@ -1,12 +1,16 @@
 "use client";
+import { login } from "@/actions/auth";
 import { Input } from "@/components/ui";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/lib/toast";
+import { redirect } from "next/navigation";
 import React from "react";
 
+
+export type FormData = { username: string; password: string }
 export default function SignInPage() {
 
-  const [formData, setFormData] = React.useState({
+  const [formData, setFormData] = React.useState<FormData>({
     username: "",
     password: "",
   });
@@ -73,7 +77,7 @@ export default function SignInPage() {
     return error;
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Marcar todos los campos como tocados
     setTouched({
@@ -85,9 +89,15 @@ export default function SignInPage() {
     const passwordError = validateField("password", formData.password);
     // Si no hay errores, enviar el formulario
     if (!usernameError && !passwordError) {
-      console.log("Formulario válido:", formData);
       // Aquí puedes hacer la petición al backend
-      toast.success("Formulario enviado correctamente");
+      const response = await login(formData);
+      if (response.success) {
+        toast.success("Iniciando sesión exitosamente");
+        redirect("/dashboard");
+        return
+      } else {  
+        toast.error(response.message);
+      }
     } else {
       console.log("Formulario inválido");
     }
