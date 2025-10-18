@@ -22,88 +22,106 @@ export default function SidebarDashboard() {
           onClick={closeSidebar}
         />
       )}
-
       {/* Sidebar */}
       <aside
         className={`
           fixed md:sticky top-0 left-0 h-screen bg-white border-r border-gray-200 z-50
-          transition-all duration-300 ease-in-out flex flex-col justify-between
-          
+          transition-all duration-300 ease-in-out flex flex-col justify-between 
           /* Mobile: Drawer */
-          ${isOpen ? "translate-x-0" : "-translate-x-full"}
-          md:translate-x-0
-          
+          ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0
           /* Desktop: Collapsed/Expanded */
           ${isCollapsed ? "md:w-20" : "md:w-64"}
           w-64
-        `}
+          `}
       >
-        {/* Header */}
-        <div className="flex items-center justify-between p-4.5 border-b border-gray-200">
-           <h1
-            className={`font-bold text-xl transition-opacity duration-300 ${
-              isCollapsed ? "md:opacity-0 md:hidden" : "opacity-100"
-            }`}
-          >
-            Admin LJP
-          </h1>
+        <div className=" h-full flex flex-col justify-between">
+          
+          {/* Header */}
+          <section className="px-4">
+            <div className="flex  items-center justify-between h-20">
+              <h1
+                className={`font-bold text-xl transition-opacity duration-300 ${
+                  isCollapsed ? "md:opacity-0 md:hidden" : "opacity-100"
+                }`}
+              >
+                Admin LJP
+              </h1>
+              {/* Botón cerrar solo en mobile */}
+              <button
+                onClick={closeSidebar}
+                className="md:hidden p-2 hover:bg-gray-100 rounded-lg"
+                aria-label="Cerrar sidebar"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+          </section>
 
-          {/* Botón cerrar solo en mobile */}
-          <button
-            onClick={closeSidebar}
-            className="md:hidden p-2 hover:bg-gray-100 rounded-lg"
-            aria-label="Cerrar sidebar"
-          >
-            <X className="w-5 h-5" />
-          </button>
-        </div>
-
-        {/* Menu Items */}
-        <nav className="p-4 space-y-2 h-full">
-          {menuItems.map((item) => {
-            const Icon = item.icon;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => closeSidebar()}
-                className={`
+          {/* Body */}
+          <section className=" h-full">
+            <nav className="p-4 space-y-2 h-full">
+              {menuItems.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => closeSidebar()}
+                    className={`
                   flex items-center gap-3 px-3 py-2 rounded-lg
                   hover:bg-gray-100 transition-colors group
                   ${isCollapsed ? "md:justify-center" : ""}
                 `}
-              >
-                <Icon className="w-5 h-5 flex-shrink-0" />
-                <span
-                  className={`transition-opacity duration-300 ${
-                    isCollapsed ? "md:opacity-0 md:hidden" : "opacity-100"
-                  }`}
-                >
-                  {item.label}
-                </span>
+                  >
+                    <Icon className="w-5 h-5 flex-shrink-0" />
+                    <span
+                      className={`transition-opacity duration-300 ${
+                        isCollapsed ? "md:opacity-0 md:hidden" : "opacity-100"
+                      }`}
+                    >
+                      {item.label}
+                    </span>
 
-                {/* Tooltip para cuando está colapsado */}
-                {isCollapsed && (
-                  <span className="hidden md:block absolute left-full ml-2 px-2 py-1 bg-gray-900 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-                    {item.label}
-                  </span>
-                )}
-              </Link>
-            );
-          })}
-        </nav>
+                    {/* Tooltip para cuando está colapsado */}
+                    {isCollapsed && (
+                      <span className="hidden md:block absolute left-full ml-2 px-2 py-1 bg-gray-900 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                        {item.label}
+                      </span>
+                    )}
+                  </Link>
+                );
+              })}
+            </nav>
+          </section>
 
-        {/* Footer */}
-        <div className="flex items-center justify-center p-4.5 border-t border-gray-200">
-           <h1
-            className={`font-bold text-xl transition-opacity duration-300 ${
-              isCollapsed ? "md:opacity-0 md:hidden" : "opacity-100"
-            }`}
-          >
-            Admin LJP
-          </h1>
+          {/* Footer */}
+          <section className="">
+            <h1
+              className={`font-bold text-xl transition-opacity duration-300 ${
+                isCollapsed ? "md:opacity-0 md:hidden" : "opacity-100"
+              }`}
+            >
+              Admin LJP
+            </h1>
+          </section>
         </div>
       </aside>
     </>
   );
 }
+
+  /* <aside
+        className={`
+          md:sticky top-0 left-0 h-screen bg-white 
+          border-r border-gray-200 z-50
+          transition-all duration-300 ease-in-out 
+          flex flex-col justify-between
+          
+          ${isOpen ? "translate-x-0" : "-translate-x-full"}
+          md:translate-x-0
+          
+          ${isCollapsed ? "md:w-20" : "md:w-64"}
+        `}
+      ></aside> 
+*/
+

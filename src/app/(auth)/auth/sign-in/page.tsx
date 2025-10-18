@@ -6,10 +6,8 @@ import { toast } from "@/lib/toast";
 import { redirect } from "next/navigation";
 import React from "react";
 
-
-export type FormData = { username: string; password: string }
+export type FormData = { username: string; password: string };
 export default function SignInPage() {
-
   const [formData, setFormData] = React.useState<FormData>({
     username: "",
     password: "",
@@ -94,8 +92,8 @@ export default function SignInPage() {
       if (response.success) {
         toast.success("Iniciando sesión exitosamente");
         redirect("/dashboard");
-        return
-      } else {  
+        return;
+      } else {
         toast.error(response.message);
       }
     } else {
@@ -104,16 +102,12 @@ export default function SignInPage() {
   };
 
   return (
-       <div className="flex min-h-svh w-full items-center justify-center ">
-
-      <div 
+    <div className="flex min-h-svh w-full items-center justify-center ">
+      <div
         className="max-w-md w-full space-y-6 p-5 md:p-8 
       bg-white rounded-lg shadow-md"
       >
-        <h2 className="text-2xl font-bold text-center">
-          Iniciar Sesión
-        </h2>
-
+        <h2 className="text-2xl font-bold text-center">Iniciar Sesión</h2>
         <form className="space-y-4" onSubmit={handleSubmit}>
           <Input
             label="Usuario"
@@ -144,8 +138,8 @@ export default function SignInPage() {
             helperText="Mínimo 8 caracteres, máximo 10"
             required
           />
-          <Button 
-            type="submit" 
+          <Button
+            type="submit"
             className="w-full"
             variant="default"
             size="default"
