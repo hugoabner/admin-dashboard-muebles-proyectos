@@ -137,18 +137,6 @@ export default function Page() {
             placeholder="Buscar por nombre, rol, email o estado..."
             className="px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"
           />
-          {/* <select
-              value={pageSize}
-              onChange={(e) => {
-                setPageSize(Number(e.target.value));
-                setPageIndex(0);
-              }}
-              className="px-2 py-2 border rounded-md"
-            >
-              <option value={5}>5 / página</option>
-              <option value={10}>10 / página</option>
-              <option value={25}>25 / página</option>
-            </select> */}
         </div>
       </header>
       <div className="overflow-x-auto w-full">
@@ -256,8 +244,21 @@ export default function Page() {
             Siguiente
           </button>
         </div>
+        <div>
+          <select
+            value={pageSize}
+            onChange={(e) => {
+              setPageSize(Number(e.target.value));
+              setPageIndex(0);
+            }}
+            className="px-2 py-2 border rounded-md"
+          >
+            <option value={5}>5 / página</option>
+            <option value={10}>10 / página</option>
+            <option value={25}>25 / página</option>
+          </select>
+        </div>
       </div>
-      
     </div>
   );
 }
