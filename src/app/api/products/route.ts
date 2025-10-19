@@ -1,6 +1,5 @@
 
 import { getProductosPaginados } from '@/lib/api/product-services';
-import { TableFilter } from '@/store/table-store';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
@@ -15,7 +14,7 @@ export async function GET(request: NextRequest) {
     const sortOrder = (searchParams.get('sortOrder') as 'asc' | 'desc') || 'asc';
 
     // Extraer filtros
-    const filters: TableFilter[] = [];
+    const filters= [];
     let filterIndex = 0;
     while (searchParams.has(`filters[${filterIndex}][field]`)) {
       const field = searchParams.get(`filters[${filterIndex}][field]`);
