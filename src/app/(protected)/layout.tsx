@@ -7,7 +7,7 @@ export default function LayoutDashboard({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex w-full h-screen bg-gray-50">
+    <div className="flex w-full h-svh bg-gray-50">
       <SidebarDashboard />
       <div className="flex-1 flex flex-col w-full h-full overflow-hidden">
         <NavbarDashboard />
