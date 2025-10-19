@@ -63,6 +63,7 @@ export default function ImageUploader() {
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
+    toast.error('Imagen cancelada.');
   };
 
   return (
