@@ -122,9 +122,11 @@ export default function Page() {
   }
 
   return (
-    <div className="mx-auto overflow-x-auto">
+    <div className="mx-auto w-full">
       <header className="flex items-center justify-between mb-4">
-        <h1 className="text-2xl font-semibold">Clientes registrados</h1>
+        <h1 className="text-sm md:text-2xl font-semibold">
+          Clientes registrados
+        </h1>
         <div className="flex gap-2 items-center">
           <input
             value={query}
@@ -135,23 +137,22 @@ export default function Page() {
             placeholder="Buscar por nombre, rol, email o estado..."
             className="px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"
           />
-          <select
-            value={pageSize}
-            onChange={(e) => {
-              setPageSize(Number(e.target.value));
-              setPageIndex(0);
-            }}
-            className="px-2 py-2 border rounded-md"
-          >
-            <option value={5}>5 / página</option>
-            <option value={10}>10 / página</option>
-            <option value={25}>25 / página</option>
-          </select>
+          {/* <select
+              value={pageSize}
+              onChange={(e) => {
+                setPageSize(Number(e.target.value));
+                setPageIndex(0);
+              }}
+              className="px-2 py-2 border rounded-md"
+            >
+              <option value={5}>5 / página</option>
+              <option value={10}>10 / página</option>
+              <option value={25}>25 / página</option>
+            </select> */}
         </div>
       </header>
-
       <div className="overflow-x-auto w-full">
-        <table className="min-w-full divide-y divide-gray-200">
+        <table className="w-full divide-y divide-gray-200">
           <thead className="bg-gray-100">
             <tr>
               {COLUMNS_CLIENT_TABLE.map((column) => (
@@ -176,10 +177,7 @@ export default function Page() {
               </tr>
             ) : (
               current.map((row) => (
-                <tr
-                  key={row.id}
-                  className="hover:bg-gray-50 transition-colors"
-                >
+                <tr key={row.id} className="hover:bg-gray-50 transition-colors">
                   <td className="px-6 py-2 whitespace-nowrap text-sm text-gray-600">
                     {row.id}
                   </td>
@@ -225,41 +223,41 @@ export default function Page() {
             )}
           </tbody>
         </table>
+      </div>
 
-        <div className="flex items-center justify-between px-4 py-3 bg-gray-100 border-t">
-          <div className="text-sm text-gray-600">
-            Mostrando{" "}
-            <span className="font-medium">
-              {filtered.length === 0 ? 0 : pageIndex * pageSize + 1}
-            </span>{" "}
-            a{" "}
-            <span className="font-medium">
-              {Math.min((pageIndex + 1) * pageSize, filtered.length)}
-            </span>{" "}
-            de <span className="font-medium">{filtered.length}</span>
+      <div className="flex flex-col  sm:flex-row items-center justify-center sm:justify-between w-full py-2 bg-gray-100">
+        <div className="text-sm text-gray-600">
+          Mostrando{" "}
+          <span className="font-medium">
+            {filtered.length === 0 ? 0 : pageIndex * pageSize + 1}
+          </span>{" "}
+          a{" "}
+          <span className="font-medium">
+            {Math.min((pageIndex + 1) * pageSize, filtered.length)}
+          </span>{" "}
+          de <span className="font-medium">{filtered.length}</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={prev}
+            disabled={pageIndex === 0}
+            className="px-3 py-1 rounded-md border disabled:opacity-50"
+          >
+            Anterior
+          </button>
+          <div className="text-sm">
+            Página {pageIndex + 1} / {pageCount}
           </div>
-
-          <div className="flex items-center gap-2">
-            <button
-              onClick={prev}
-              disabled={pageIndex === 0}
-              className="px-3 py-1 rounded-md border disabled:opacity-50"
-            >
-              Anterior
-            </button>
-            <div className="text-sm">
-              Página {pageIndex + 1} / {pageCount}
-            </div>
-            <button
-              onClick={next}
-              disabled={pageIndex >= pageCount - 1}
-              className="px-3 py-1 rounded-md border disabled:opacity-50"
-            >
-              Siguiente
-            </button>
-          </div>
+          <button
+            onClick={next}
+            disabled={pageIndex >= pageCount - 1}
+            className="px-3 py-1 rounded-md border disabled:opacity-50"
+          >
+            Siguiente
+          </button>
         </div>
       </div>
+      
     </div>
   );
 }

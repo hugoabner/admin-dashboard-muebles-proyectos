@@ -7,14 +7,12 @@ export default function LayoutDashboard({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex min-h-screen ">
-      {/* Sidebar */}
+    <div className="flex w-full h-screen bg-gray-50">
       <SidebarDashboard />
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col w-full">
+      <div className="flex-1 flex flex-col w-full h-full overflow-hidden">
         <NavbarDashboard />
-        <main className="overflow-y-auto p-3">
-          {children}
+        <main className="flex-1 overflow-y-auto p-4 md:p-6">
+          <div className="mx-auto">{children}</div>
         </main>
       </div>
     </div>
