@@ -44,7 +44,6 @@ export default function ImageUploader() {
           fileInputRef.current.value = '';
         }
       } else {
-        toast.error('Error al guardar la imagen.');
         handleCancel();
       }
     } catch (error) {
