@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useRef, useState } from 'react';
 
 export default function ImageUploader() {
+  
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);

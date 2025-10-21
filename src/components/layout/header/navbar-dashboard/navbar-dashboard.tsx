@@ -13,7 +13,7 @@ export default function NavbarDashboard() {
     >
       {" "}
         <ToggleSidebarButton />
-        <h2 className="text-lg font-semibold">Panel de Control</h2>
+        <h2 className="ml-2 text-lg font-semibold">Panel de Control</h2>
 
         {/* Aquí puedes agregar más elementos del header */}
         <div className="ml-auto flex items-center gap-2">
@@ -22,6 +22,9 @@ export default function NavbarDashboard() {
             <form action={handleLogout}>
               <Button type="submit">Logout</Button>
             </form>{" "}
+          </div>
+          <div>
+            <Button>Notificaciones</Button>
           </div>
         </div>
     </nav>

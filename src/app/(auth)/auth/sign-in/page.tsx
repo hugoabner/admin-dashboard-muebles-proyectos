@@ -102,10 +102,10 @@ export default function SignInPage() {
   };
 
   return (
-    <div className="flex min-h-svh w-full items-center justify-center ">
+    <div className="flex min-h-svh w-full items-center justify-center p-4 sm:p-0">
       <div
         className="max-w-md w-full space-y-6 p-5 md:p-8 
-      bg-white rounded-lg shadow-md"
+      bg-white rounded-lg shadow-md border"
       >
         <h2 className="text-2xl font-bold text-center">Iniciar Sesión</h2>
         <form className="space-y-4" onSubmit={handleSubmit}>
@@ -116,7 +116,7 @@ export default function SignInPage() {
             value={formData.username}
             onChange={handleChange}
             onBlur={handleBlur}
-            placeholder="Username"
+            placeholder="Usuario"
             minLength={3}
             maxLength={20}
             error={touched.username ? errors.username : ""}

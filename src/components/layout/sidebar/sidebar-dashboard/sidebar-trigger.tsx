@@ -1,7 +1,8 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { useSidebarStore } from "@/store/sidebar-store";
-import { Menu } from "lucide-react";
+import { TextAlignStart } from "lucide-react";
 
 export function ToggleSidebarButton() {
   const { toggleCollapse, toggleSidebar } = useSidebarStore();
@@ -15,12 +16,12 @@ export function ToggleSidebarButton() {
     }
   };
   return (
-    <button
+    <Button
+      variant={"ghost"}
       onClick={handleToggle}
-      className={`p-2 hover:bg-gray-100 rounded-lg transition-colors`}
       aria-label="Toggle sidebar"
     >
-      <Menu className="w-6 h-6" />
-    </button>
+      <TextAlignStart className="w-6 h-6" />
+    </Button>
   );
 }

@@ -25,13 +25,13 @@ export default function SidebarDashboard() {
       {/* Sidebar */}
       <aside
         className={`
-          fixed md:sticky top-0 left-0 h-screen bg-white border-r border-gray-200 z-50
-          transition-all duration-300 ease-in-out flex flex-col justify-between 
+          fixed md:sticky top-0 left-0 h-screen bg-white  border-r border-gray-200 z-50
+          transition-all duration-300 ease-in-out flex flex-col justify-between overflow-hidden
           /* Mobile: Drawer */
           ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0
           /* Desktop: Collapsed/Expanded */
-          ${isCollapsed ? "md:w-20" : "md:w-64"}
-          w-64
+          ${isCollapsed ? "md:w-16" : "md:w-56"}
+          w-56
           `}
       >
         <div className=" h-full flex flex-col justify-between">
