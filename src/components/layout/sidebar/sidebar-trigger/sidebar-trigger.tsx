@@ -4,7 +4,9 @@ import { Button } from "@/components/ui/button";
 import { useSidebarStore } from "@/store/sidebar-store";
 import { TextAlignStart } from "lucide-react";
 
-export function ToggleSidebarButton() {
+
+
+export default function SidebarTrigger() {
   const { toggleCollapse, toggleSidebar } = useSidebarStore();
   const handleToggle = () => {
     // En mobile: toggle drawer
@@ -15,6 +17,7 @@ export function ToggleSidebarButton() {
       toggleCollapse();
     }
   };
+
   return (
     <Button
       variant={"ghost"}

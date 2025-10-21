@@ -1,5 +1,5 @@
 
-export default function NavbarAuth() {
+const NavbarAuth = () => {
   return (
     <nav
       className="fixed top-0 flex items-center bg-background 
@@ -9,5 +9,7 @@ export default function NavbarAuth() {
         Admin Panel
       </div>
     </nav>
-  );
+  )
 }
+
+export default NavbarAuth

@@ -70,7 +70,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
 					${
             displayError
               ? "border-red-500 focus:ring-red-500 focus:border-red-500"
-              : "border-gray-400 focus:ring-primary focus:border-primary"
+              : "border-gray-300 focus:ring-primary focus:border-primary"
           }
           ${className}
 				`}

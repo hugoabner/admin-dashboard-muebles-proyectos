@@ -1,58 +1,10 @@
 "use client";
+import { SIDEBAR_LINKS } from "@/constants/sidebar-constants";
 import { useSidebarStore } from "@/store/sidebar-store";
 import {
-  HandPlatter,
-  Home,
-  LucideIcon,
-  Package,
-  Settings,
-  Users,
-  X,
+  X
 } from "lucide-react";
 import Link from "next/link";
-export type NavItem = {
-  label: string;
-  href: string;
-  icon?: LucideIcon;
-  isActive?: boolean;
-  // items?: {
-  // 	title: string;
-  // 	url: string;
-  // }[];
-};
-
-const SIDEBAR_LINKS: NavItem[] = [
-  {
-    label: "Dashboard",
-    href: "/dashboard",
-    icon: Home,
-    isActive: false,
-  },
-  {
-    label: "Productos",
-    href: "/dashboard/products",
-    icon: Package,
-    isActive: false,
-  },
-  {
-    label: "Servicios",
-    href: "/dashboard/services",
-    icon: HandPlatter,
-    isActive: false,
-  },
-  {
-    label: "Clientes",
-    href: "/dashboard/clients",
-    icon: Users,
-    isActive: false,
-  },
-  {
-    label: "Configuración",
-    href: "/dashboard/configurations",
-    icon: Settings,
-    isActive: false,
-  },
-];
 
 export default function SidebarDashboard() {
   const { isOpen, isCollapsed, closeSidebar } = useSidebarStore();
@@ -152,18 +104,3 @@ export default function SidebarDashboard() {
     </>
   );
 }
-
-/* <aside
-        className={`
-          md:sticky top-0 left-0 h-screen bg-white 
-          border-r border-gray-200 z-50
-          transition-all duration-300 ease-in-out 
-          flex flex-col justify-between
-          
-          ${isOpen ? "translate-x-0" : "-translate-x-full"}
-          md:translate-x-0
-          
-          ${isCollapsed ? "md:w-20" : "md:w-64"}
-        `}
-      ></aside> 
-*/

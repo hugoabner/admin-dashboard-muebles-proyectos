@@ -1,26 +1,8 @@
 'use client';
 
-import { useRef, useState, type ReactNode } from 'react';
+import { useRef, useState } from 'react';
+import { DropdownCustomProps } from './dropdown-custom-types';
 
-interface DropdownOption {
-  value: string;
-  label: string;
-  icon?: ReactNode;
-  disabled?: boolean;
-}
-
-interface DropdownCustomProps {
-  options: DropdownOption[];
-  value?: string;
-  onChange?: (value: string) => void;
-  placeholder?: string;
-  className?: string;
-  disabled?: boolean;
-  error?: string;
-  label?: string;
-  required?: boolean;
-  searchable?: boolean;
-}
 
 export default function DropdownCustom({
   options,

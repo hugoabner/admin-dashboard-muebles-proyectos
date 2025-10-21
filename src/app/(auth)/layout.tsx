@@ -1,4 +1,4 @@
-import NavbarAuth from "@/components/layout/header/navbar-auth/navbar-auth";
+import { NavbarAuth } from "@/components/layout/header";
 import React from "react";
 
 export default function LayoutAuth({
@@ -8,7 +8,7 @@ export default function LayoutAuth({
 }>) {
   return (
     <main>
-      <NavbarAuth/>
+      <NavbarAuth />
       {children}
     </main>
   );

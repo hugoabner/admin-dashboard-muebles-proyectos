@@ -1,39 +1,19 @@
 'use client';
 
-import { ChevronDown, LucideIcon } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import Image from 'next/image';
 import { useRef, useState } from 'react';
+import { AvatarDropdownProps, DropdownItem } from './avatar-custom-types';
 
-interface DropdownItem {
-  id: string;
-  label: string;
-  icon?: LucideIcon;
-  onClick?: () => void;
-  href?: string;
-  disabled?: boolean;
-  divider?: boolean;
-  danger?: boolean;
-}
 
-interface AvatarDropdownProps {
-  user: {
-    name: string;
-    email?: string;
-    image?: string;
-  };
-  items?: DropdownItem[];
-  className?: string;
-  showChevron?: boolean;
-  position?: 'left' | 'right';
-}
-
-export default function AvatarDropdown({
+export default function AvatarCustom({
   user,
   items = [],
   className = '',
   showChevron = false,
   position = 'right',
 }: AvatarDropdownProps) {
+
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
