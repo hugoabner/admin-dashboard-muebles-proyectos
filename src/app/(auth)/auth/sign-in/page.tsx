@@ -113,6 +113,7 @@ export default function SignInPage() {
             label="Usuario"
             type="text"
             name="username"
+            title="username"
             value={formData.username}
             onChange={handleChange}
             onBlur={handleBlur}
@@ -128,6 +129,7 @@ export default function SignInPage() {
             label="Contraseña"
             type="password"
             name="password"
+            title="password"
             value={formData.password}
             onChange={handleChange}
             onBlur={handleBlur}

@@ -65,14 +65,14 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         <input
           ref={ref}
           className={`
-					px-2 py-1.5 border rounded-md outline-none 
-					transition-colors focus:ring-0.5
+					px-2 py-1 border rounded-md outline-none 
+					transition-colors focus:ring-0.5 placeholder:text-gray-400 placeholder:text-sm
 					${
             displayError
               ? "border-red-500 focus:ring-red-500 focus:border-red-500"
-              : "border-gray-300 focus:ring-primary focus:border-primary"
+              : "border-gray-400 focus:ring-primary focus:border-primary"
           }
-            		${className}
+          ${className}
 				`}
           minLength={minLength}
           maxLength={maxLength}
