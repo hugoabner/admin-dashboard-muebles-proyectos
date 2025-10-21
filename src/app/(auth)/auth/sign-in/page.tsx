@@ -104,7 +104,7 @@ export default function SignInPage() {
   return (
     <div className="flex min-h-svh w-full items-center justify-center p-4 sm:p-0">
       <div
-        className="max-w-md w-full space-y-6 p-5 md:p-8 
+        className="max-w-sm w-full space-y-6 p-5 md:p-8 
       bg-white rounded-lg shadow-md border"
       >
         <h2 className="text-2xl font-bold text-center">Iniciar Sesión</h2>
