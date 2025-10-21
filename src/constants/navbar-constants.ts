@@ -2,10 +2,9 @@ import { handleLogout } from "@/actions/logout-actions";
 import { LogOut, Settings, User } from "lucide-react";
 
 export const USER = {
-  name: "Juan Pérez",
+  name: "Admin Panel",
   email: "juan@example.com",
   // image: "/images/profile1.jpg", // opcional
-  name: "Juan",
 };
 
 // Items del dropdown

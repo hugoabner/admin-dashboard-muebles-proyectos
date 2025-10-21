@@ -75,7 +75,7 @@ export default function AvatarDropdown({
           aria-haspopup="true"
         >
           {/* Avatar Image */}
-          <div className="relative w-10 h-10 rounded-full overflow-hidden 
+          <div className="relative w-9 h-9 rounded-full overflow-hidden 
             ring-2 ring-red-200 group-hover:ring-red-500 
             transition-all duration-200">
             {user.image ? (
@@ -88,7 +88,7 @@ export default function AvatarDropdown({
             ) : (
               <div className="w-full h-full bg-gradient-to-br from-gray-500 
                 to-red-600 flex items-center justify-center 
-                text-white font-semibold text-lg">
+                text-white font-semibold text-sm">
                 {getInitials(user.name)}
               </div>
             )}
