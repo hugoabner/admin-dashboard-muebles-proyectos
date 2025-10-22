@@ -1,13 +1,13 @@
 import { SidebarGroup } from "@/components/layout/sidebar/sidebar-main/sidebar-main";
 import {
-  CreditCard,
+  Edit2,
   HandPlatter,
-  Home,
   LayoutDashboard,
+  ListCheck,
   Package,
+  Plus,
   Settings,
-  ShoppingCart,
-  Users,
+  Users
 } from "lucide-react";
 
 export const SIDEBAR_GROUPS: SidebarGroup[] = [
@@ -22,9 +22,26 @@ export const SIDEBAR_GROUPS: SidebarGroup[] = [
       },
       {
         label: "Productos",
-        href: "/dashboard/products",
+        href: "",
         icon: Package,
         isActive: false,
+        subItems: [
+          {
+            label: "List",
+            href: "/dashboard/products/list",
+            icon: ListCheck,
+          },
+          {
+            label: "Create",
+            href: "/dashboard/products/create",
+            icon: Plus,
+          },
+          {
+            label: "Edit",
+            href: "/dashboard/products/edit",
+            icon: Edit2,
+          },
+        ],
       },
       {
         label: "Servicios",
@@ -46,108 +63,108 @@ export const SIDEBAR_GROUPS: SidebarGroup[] = [
       },
     ],
   },
-  {
-    title: "Ecommerce",
-    items: [
-      {
-        label: "Ecommerce",
-        icon: ShoppingCart,
-        href: "",
-        isActive: false,
-        subItems: [
-          {
-            label: "Home",
-            href: "/ecommerce/home",
-            icon: Home,
-          },
-          {
-            label: "Products",
-            href: "/ecommerce/products",
-          },
-          {
-            label: "Orders",
-            href: "/ecommerce/orders",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    title: "Banking",
-    items: [
-      {
-        label: "Banking",
-        icon: CreditCard,
-        href: "",
-        isActive: false,
-        subItems: [
-          {
-            label: "Home",
-            href: "/banking/home",
-            icon: Home,
-          },
-          {
-            label: "Transactions",
-            href: "/banking/transactions",
-          },
-          {
-            label: "Accounts",
-            href: "/banking/accounts",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    title: "Bankssaaaing",
-    items: [
-      {
-        label: "Baaankiang",
-        icon: CreditCard,
-        href: "",
-        isActive: false,
-        subItems: [
-          {
-            label: "Homae",
-            href: "/baanking/home",
-            icon: Home,
-          },
-          {
-            label: "Tranasactions",
-            href: "/baanking/transactions",
-          },
-          {
-            label: "Accaounts",
-            href: "/banaking/accounts",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    title: "Bankiaansg",
-    items: [
-      {
-        label: "Bankaaing",
-        icon: CreditCard,
-        href: "",
-        isActive: false,
-        subItems: [
-          {
-            label: "Homaae",
-            href: "/baaanking/home",
-            icon: Home,
-          },
-          {
-            label: "Transaaactions",
-            href: "/bankiaang/transactions",
-          },
-          {
-            label: "Accoaaunts",
-            href: "/banking/accounts",
-          },
-        ],
-      },
-    ],
-  },
+  // {
+  //   title: "Ecommerce",
+  //   items: [
+  //     {
+  //       label: "Ecommerce",
+  //       icon: ShoppingCart,
+  //       href: "",
+  //       isActive: false,
+  //       subItems: [
+  //         {
+  //           label: "Home",
+  //           href: "/ecommerce/home",
+  //           icon: Home,
+  //         },
+  //         {
+  //           label: "Products",
+  //           href: "/ecommerce/products",
+  //         },
+  //         {
+  //           label: "Orders",
+  //           href: "/ecommerce/orders",
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
+  // {
+  //   title: "Banking",
+  //   items: [
+  //     {
+  //       label: "Banking",
+  //       icon: CreditCard,
+  //       href: "",
+  //       isActive: false,
+  //       subItems: [
+  //         {
+  //           label: "Home",
+  //           href: "/banking/home",
+  //           icon: Home,
+  //         },
+  //         {
+  //           label: "Transactions",
+  //           href: "/banking/transactions",
+  //         },
+  //         {
+  //           label: "Accounts",
+  //           href: "/banking/accounts",
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
+  // {
+  //   title: "Bankssaaaing",
+  //   items: [
+  //     {
+  //       label: "Baaankiang",
+  //       icon: CreditCard,
+  //       href: "",
+  //       isActive: false,
+  //       subItems: [
+  //         {
+  //           label: "Homae",
+  //           href: "/baanking/home",
+  //           icon: Home,
+  //         },
+  //         {
+  //           label: "Tranasactions",
+  //           href: "/baanking/transactions",
+  //         },
+  //         {
+  //           label: "Accaounts",
+  //           href: "/banaking/accounts",
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
+  // {
+  //   title: "Bankiaansg",
+  //   items: [
+  //     {
+  //       label: "Bankaaing",
+  //       icon: CreditCard,
+  //       href: "",
+  //       isActive: false,
+  //       subItems: [
+  //         {
+  //           label: "Homaae",
+  //           href: "/baaanking/home",
+  //           icon: Home,
+  //         },
+  //         {
+  //           label: "Transaaactions",
+  //           href: "/bankiaang/transactions",
+  //         },
+  //         {
+  //           label: "Accoaaunts",
+  //           href: "/banking/accounts",
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
 ];
