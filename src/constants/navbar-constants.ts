@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 export const USER = {
   name: "Admin Panel",
   email: "juan@example.com",
-  // image: "/images/profile1.jpg", // opcional
+  image: "/images/profile3.png", // opcional
 };
 // Items del dropdown
 export const DROPDOWN_AVATAR_ITEMS = [
