@@ -9,7 +9,7 @@ export default function NotFound() {
       <p className="text-muted-foreground">
         No se pudo encontrar la página que estás buscando.
       </p>
-      <Link replace href="/">
+      <Link replace href="/dashboard">
         <Button variant="outline">Volver ala página principal</Button>
       </Link>
     </div>
