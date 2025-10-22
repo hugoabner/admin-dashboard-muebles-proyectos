@@ -112,7 +112,7 @@ export default function ProductImage() {
               <h3 className="font-semibold text-gray-700">
                 Imágenes seleccionadas ({images.length}/5):
               </h3>
-              <div className="flex  w-full">
+              <div className="flex w-full">
                 <div className="w-44">
                   <div
                     onDragOver={handleDragOver}
@@ -157,7 +157,7 @@ export default function ProductImage() {
                 <div className="w-full">
                   {images.length > 0 && (
                     <div className="space-y-3">
-                      <div className="grid grid-cols-3 gap-4">
+                      <div className="grid md:grid-cols-3 gap-4">
                         {images.map((img, index) => (
                           <div key={index} className="relative group">
                             <div className="aspect-square relative rounded-lg overflow-hidden border-2 border-gray-200">
