@@ -50,7 +50,7 @@ export default function SidebarDashboard() {
             </div>
           </section>
           {/* Body */}
-          <section className={`h-full overflow-y-auto`}>
+          <section className={`h-full overflow-y-auto max-h-svh`}>
             <nav className="p-4 space-y-1 ">
               {SIDEBAR_GROUPS.map((group) => (
                 <div key={group.title} className="mb-4">
