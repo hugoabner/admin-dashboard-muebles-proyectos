@@ -1,6 +1,7 @@
 "use client";
 
-import { X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Eye, Images, X } from "lucide-react";
 import Image from "next/image";
 import { useCallback, useState } from "react";
 
@@ -12,6 +13,7 @@ interface ImageFile {
 export default function ProductImage() {
   const [images, setImages] = useState<ImageFile[]>([]);
   const [isDragging, setIsDragging] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const handleFileSelect = useCallback(
     (files: FileList | null) => {
@@ -101,19 +103,29 @@ export default function ProductImage() {
       alert("Error al subir las imágenes");
     }
   };
+
+  const viewImage = (preview: string) => {
+    setSelectedImage(preview);
+  };
+
+  const closeModal = () => {
+    setSelectedImage(null);
+  };
+
   return (
     <div className="bg-white">
       <div className="flex w-full">
         <div className="w-full space-y-2 p-5 md:p-8 bg-white rounded-lg shadow-md border">
           <h2 className="text-2xl font-bold ">Imagen de producto</h2>
           <p>Elija una imagen de un producto o simplemente arrastrela</p>
+          {/* seccion de imagenes */}
           <section className="space-y-4">
             <div className="">
               <h3 className="font-semibold text-gray-700">
                 Imágenes seleccionadas ({images.length}/5):
               </h3>
-              <div className="flex w-full">
-                <div className="w-44">
+              <div className="flex flex-wrap gap-2 w-full">
+                <div className="w-full">
                   <div
                     onDragOver={handleDragOver}
                     onDragLeave={handleDragLeave}
@@ -124,20 +136,8 @@ export default function ProductImage() {
                         : "border-gray-300"
                     }`}
                   >
-                    <div className="w-28">
-                      <svg
-                        className="mx-auto h-10 w-10 text-gray-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                        />
-                      </svg>
+                    <div className="flex flex-col items-center">
+                      <Images className="text-gray-500" size={60} />
                       <p className="text-xs text-gray-600 flex flex-col">
                         Suelta tu imagen aquí o{" "}
                         <label className="text-blue-600 hover:text-blue-700 cursor-pointer font-medium">
@@ -154,35 +154,115 @@ export default function ProductImage() {
                     </div>
                   </div>
                 </div>
+                {/* imagenes */}
                 <div className="w-full">
                   {images.length > 0 && (
-                    <div className="space-y-3">
-                      <div className="grid md:grid-cols-3 gap-4">
-                        {images.map((img, index) => (
-                          <div key={index} className="relative group">
-                            <div className="aspect-square relative rounded-lg overflow-hidden border-2 border-gray-200">
-                              <Image
-                                src={img.preview}
-                                alt={`Preview ${index + 1}`}
-                                fill
-                                className="object-cover"
-                              />
-                            </div>
-                            <button
-                              onClick={() => removeImage(index)}
-                              className="absolute -top-2 -right-2 bg-red-500 text-white 
-                              rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
+                      {images.map((img, index) => (
+                        <div key={index} className="relative group">
+                          {/* Contenedor de imagen */}
+                          <div className="aspect-square relative rounded-lg overflow-hidden border-2 border-gray-200">
+                            <Image
+                              src={img.preview}
+                              alt={`Preview ${index + 1}`}
+                              fill
+                              className="object-cover"
+                            />
+                            {/* Capa de botones que aparece al hacer hover */}
+                            <div
+                              className="absolute inset-0 flex items-center justify-center 
+                              gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 
+                              bg-black/70"
+                            />
+                            {/* Capa de botones que aparece al hacer hover */}
+                            <div
+                              className="absolute inset-0 flex items-center justify-center 
+                              gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                             >
-                              <X size={16} />
-                            </button>
+                              <button
+                                onClick={() => viewImage(img.preview)}
+                                className="bg-blue-500 text-white rounded-full
+                                p-2 hover:bg-blue-600 transition"
+                              >
+                                <Eye size={18} />
+                              </button>
+                              <button
+                                onClick={() => removeImage(index)}
+                                className="bg-red-500 text-white rounded-full 
+                                p-2 hover:bg-red-600 transition"
+                              >
+                                <X size={18} />
+                              </button>
+                            </div>
                           </div>
-                        ))}
-                      </div>
+                        </div>
+                      ))}
                     </div>
                   )}
                 </div>
               </div>
-              {/* <div className="flex gap-3 pt-4">
+            </div>
+            <p className="text-sm text-gray-500">
+              Formatos de imagen: .jpg, .jpeg, .png, tamaño preferido: 1:1, el
+              tamaño del archivo está restringido a un máximo de 500 kb.
+            </p>
+          </section>
+        </div>
+      </div>
+      {/* Modal para ver imagen */}
+      {selectedImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 
+          backdrop-blur-sm p-4 animate-in fade-in duration-200"
+          onClick={closeModal}
+        >
+          {/* Contenedor del modal */}
+          <div
+            className="relative w-full max-w-4xl mx-auto flex flex-col gap-1"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Botón de cerrar */}
+            <div className="flex justify-end">
+              <Button
+                onClick={closeModal}
+                variant="secondary"
+                size="icon"
+                className="rounded-full bg-white/10 hover:bg-white/20 
+                backdrop-blur-md border border-white/20 text-white 
+                transition-all duration-200 hover:scale-110"
+              >
+                <X size={24} />
+              </Button>
+            </div>
+            {/* Contenedor de la imagen */}
+            <div
+              className="relative w-full bg-black/50 backdrop-blur-sm 
+              rounded-2xl overflow-hidden border border-white/10 shadow-2xl"
+            >
+              <div className="relative w-full aspect-square sm:aspect-video">
+                <Image
+                  src={selectedImage}
+                  alt="Vista previa"
+                  fill
+                  className="object-contain p-2 sm:p-4"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+                  priority
+                />
+              </div>
+            </div>
+
+            {/* Indicador de cierre (opcional) */}
+            <p className="text-center text-white/60 text-sm hidden sm:block">
+              Haz clic fuera de la imagen para cerrar
+            </p>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+{
+  /* <div className="flex gap-3 pt-4">
                 <button
                   onClick={handleConfirm}
                   className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium"
@@ -198,15 +278,5 @@ export default function ProductImage() {
                 >
                   Cancelar
                 </button>
-              </div> */}
-            </div>{" "}
-            <p className="text-sm text-gray-500">
-              Formatos de imagen: .jpg, .jpeg, .png, tamaño preferido: 1:1, el
-              tamaño del archivo está restringido a un máximo de 500 kb.
-            </p>
-          </section>
-        </div>
-      </div>
-    </div>
-  );
+              </div> */
 }
