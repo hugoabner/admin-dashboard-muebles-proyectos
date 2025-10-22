@@ -19,7 +19,7 @@ export default function SidebarDashboard() {
       {/* Sidebar */}
       <aside
         className={`
-          fixed md:sticky top-0 left-0 h-screen bg-white  border-r border-gray-200 z-50
+          fixed md:sticky top-0 left-0 h-svh bg-white  border-r border-gray-200 z-50
           transition-all duration-300 ease-in-out flex flex-col justify-between
           /* Mobile: Drawer */
           ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0
@@ -50,7 +50,7 @@ export default function SidebarDashboard() {
             </div>
           </section>
           {/* Body */}
-          <section className={`h-full overflow-y-auto max-h-svh`}>
+          <section className={`h-full overflow-y-auto`}>
             <nav className="p-4 space-y-1 ">
               {SIDEBAR_GROUPS.map((group) => (
                 <div key={group.title} className="mb-4">
