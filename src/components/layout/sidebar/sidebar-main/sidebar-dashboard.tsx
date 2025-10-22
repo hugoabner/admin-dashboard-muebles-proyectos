@@ -1,13 +1,12 @@
 "use client";
-import { SIDEBAR_LINKS } from "@/constants/sidebar-constants";
+import { SIDEBAR_GROUPS } from "@/constants/sidebar-constants";
 import { useSidebarStore } from "@/store/sidebar-store";
-import {
-  X
-} from "lucide-react";
-import Link from "next/link";
+import { X } from "lucide-react";
+import SidebarMenuItem from "./sidebar-menu-item";
 
 export default function SidebarDashboard() {
-  const { isOpen, isCollapsed, closeSidebar } = useSidebarStore();
+  const { isOpen, isCollapsed, closeSidebar, expandedGroup, toggleGroup } =
+    useSidebarStore();
   return (
     <>
       {/* Overlay para mobile */}
@@ -21,7 +20,7 @@ export default function SidebarDashboard() {
       <aside
         className={`
           fixed md:sticky top-0 left-0 h-screen bg-white  border-r border-gray-200 z-50
-          transition-all duration-300 ease-in-out flex flex-col justify-between overflow-visible
+          transition-all duration-300 ease-in-out flex flex-col justify-between
           /* Mobile: Drawer */
           ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0
           /* Desktop: Collapsed/Expanded */
@@ -31,7 +30,7 @@ export default function SidebarDashboard() {
       >
         <div className=" h-full flex flex-col justify-between">
           {/* Header */}
-          <section className="px-4">
+          <section className="px-4 ">
             <div className="flex  items-center justify-between h-20">
               <h1
                 className={`font-bold text-xl transition-opacity duration-300 
@@ -50,41 +49,41 @@ export default function SidebarDashboard() {
               </button>
             </div>
           </section>
-
           {/* Body */}
-          <section className=" h-full">
-            <nav className="p-4 space-y-2 h-full">
-              {SIDEBAR_LINKS.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => closeSidebar()}
-                  className={`
-                  flex items-center gap-3 px-3 py-2 rounded-lg
-                  hover:bg-gray-100 transition-colors group
-                  ${isCollapsed ? "md:justify-center" : ""}
-                `}
-                >
-                  {item.icon && <item.icon className="w-5 h-5 flex-shrink-0" />}
-                  <span
-                    className={`transition-opacity duration-300 ${
-                      isCollapsed ? "md:opacity-0 md:hidden" : "opacity-100"
-                    }`}
-                  >
-                    {item.label}
-                  </span>
-
-                  {/* Tooltip para cuando está colapsado */}
-                  {isCollapsed && (
-                    <span className="hidden md:block absolute 
-                    left-full px-2 py-1 bg-gray-900 
-                    text-white text-sm rounded opacity-0 
-                    group-hover:opacity-100 transition-opacity 
-                    whitespace-nowrap pointer-events-none">
-                      {item.label}
+          <section className={`h-full overflow-y-auto`}>
+            <nav className="p-4 space-y-1 ">
+              {SIDEBAR_GROUPS.map((group) => (
+                <div key={group.title} className="mb-4">
+                  {/* Título del grupo */}
+                  <h3 className="px-3 mb-2 text-xs font-semibold text-gray-500 
+                  uppercase tracking-wider transition-opacity duration-300">
+                    {/* Tres puntos cuando está colapsado (solo en md+) */}
+                    <span
+                      className={`${
+                        isCollapsed ? "md:block hidden" : "hidden"
+                      } text-center`}
+                    >
+                      •••
                     </span>
-                  )}
-                </Link>
+                    {/* Título normal cuando está expandido */}
+                    <span className={`${isCollapsed ? "md:hidden" : ""}`}>
+                      {group.title}
+                    </span>
+                  </h3>
+                  {/* Items del grupo */}
+                  <div className="space-y-1">
+                    {group.items.map((item) => (
+                      <SidebarMenuItem
+                        key={item.href || item.label}
+                        item={item}
+                        isCollapsed={isCollapsed}
+                        onCloseSidebar={closeSidebar}
+                        isExpanded={expandedGroup === item.label}
+                        onToggle={() => toggleGroup(item.label)}
+                      />
+                    ))}
+                  </div>
+                </div>
               ))}
             </nav>
           </section>

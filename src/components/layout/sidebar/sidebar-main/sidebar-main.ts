@@ -10,8 +10,13 @@ export type NavItem = {
   href: string;
   icon?: LucideIcon;
   isActive?: boolean;
-  // items?: {
-  // 	title: string;
-  // 	url: string;
-  // }[];
+  subItems?: {
+  	label: string;
+  	href: string;
+  	icon?: LucideIcon;
+  }[];
 };
+export interface SidebarGroup {
+  title: string;
+  items: NavItem[];
+}

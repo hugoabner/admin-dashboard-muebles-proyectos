@@ -1,19 +1,27 @@
 import { create } from "zustand";
 
-export interface SidebarStore {
-  isOpen: boolean; // Para mobile (drawer)
-  isCollapsed: boolean; // Para desktop (collapsed)
+interface SidebarState {
+  isOpen: boolean;
+  isCollapsed: boolean;
+  expandedGroup: string | null;
+  openSidebar: () => void;
+  closeSidebar: () => void;
   toggleSidebar: () => void;
   toggleCollapse: () => void;
-  closeSidebar: () => void;
-  openSidebar: () => void;
+  setExpandedGroup: (groupLabel: string | null) => void;
+  toggleGroup: (groupLabel: string) => void;
 }
 
-export const useSidebarStore = create<SidebarStore>((set) => ({
+export const useSidebarStore = create<SidebarState>((set) => ({
   isOpen: false,
   isCollapsed: false,
+  expandedGroup: null,
+  openSidebar: () => set({ isOpen: true }),
+  closeSidebar: () => set({ isOpen: false }),
   toggleSidebar: () => set((state) => ({ isOpen: !state.isOpen })),
   toggleCollapse: () => set((state) => ({ isCollapsed: !state.isCollapsed })),
-  closeSidebar: () => set({ isOpen: false }),
-  openSidebar: () => set({ isOpen: true }),
+  setExpandedGroup: (groupLabel) => set({ expandedGroup: groupLabel }),
+  toggleGroup: (groupLabel) => set((state) => ({
+    expandedGroup: state.expandedGroup === groupLabel ? null : groupLabel
+  })),
 }));
