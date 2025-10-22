@@ -23,7 +23,7 @@ export default function ProductImage() {
         const isValidType = ["image/jpeg", "image/jpg", "image/png"].includes(
           file.type
         );
-        const isValidSize = file.size <= 500 * 1024; // 500kb
+        const isValidSize = file.size <= 1000 * 1024; // 500kb
 
         if (!isValidType) {
           alert(`${file.name}: Formato no válido. Use .jpg, .jpeg o .png`);
