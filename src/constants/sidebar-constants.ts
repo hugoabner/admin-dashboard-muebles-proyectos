@@ -56,6 +56,12 @@ export const SIDEBAR_GROUPS: SidebarGroup[] = [
         isActive: false,
       },
       {
+        label: "Reservas",
+        href: "/dashboard/reservations",
+        icon: ListCheck,
+        isActive: false,
+      },
+      {
         label: "Configuración",
         href: "/dashboard/configurations",
         icon: Settings,

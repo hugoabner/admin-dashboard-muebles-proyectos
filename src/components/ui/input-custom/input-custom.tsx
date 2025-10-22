@@ -66,7 +66,8 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           className={`
 					px-2 py-1 border rounded-md outline-none 
-					transition-colors focus:ring-0.5 placeholder:text-gray-400 placeholder:text-sm
+					transition-colors focus:ring-0.5 placeholder:text-gray-400 
+          placeholder:text-sm
 					${
             displayError
               ? "border-red-500 focus:ring-red-500 focus:border-red-500"

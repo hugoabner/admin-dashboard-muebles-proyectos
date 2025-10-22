@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { useRef, useState } from 'react';
-import { DropdownCustomProps } from './dropdown-custom-types';
-
+import { Check, ChevronDown } from "lucide-react";
+import { useRef, useState } from "react";
+import { DropdownCustomProps } from "./dropdown-custom-types";
 
 export default function DropdownCustom({
   options,
   value,
   onChange,
-  placeholder = 'Selecciona una opción',
-  className = '',
+  placeholder = "Selecciona una opción",
+  className = "",
   disabled = false,
   error,
   label,
@@ -17,7 +17,7 @@ export default function DropdownCustom({
   searchable = false,
 }: DropdownCustomProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const selectedOption = options.find((opt) => opt.value === value);
@@ -32,7 +32,7 @@ export default function DropdownCustom({
     if (!disabled) {
       onChange?.(optionValue);
       setIsOpen(false);
-      setSearchTerm('');
+      setSearchTerm("");
     }
   };
 
@@ -45,7 +45,7 @@ export default function DropdownCustom({
   const handleBlur = (e: React.FocusEvent) => {
     if (!dropdownRef.current?.contains(e.relatedTarget as Node)) {
       setIsOpen(false);
-      setSearchTerm('');
+      setSearchTerm("");
     }
   };
 
@@ -64,50 +64,51 @@ export default function DropdownCustom({
           onClick={handleToggle}
           disabled={disabled}
           className={`
-            w-full px-4 py-2.5 text-left bg-white border rounded-lg
+            w-full px-2 py-[4px] text-left bg-white border rounded-md
             flex items-center justify-between gap-2
-            transition-all duration-200
-            ${disabled ? 'opacity-50 cursor-not-allowed bg-gray-50' : 'hover:border-blue-500 cursor-pointer'}
-            ${error ? 'border-red-500' : 'border-gray-300'}
-            ${isOpen ? 'border-blue-500 ring-2 ring-blue-200' : ''}
+            transition-all duration-200 
+            ${
+              disabled
+                ? "opacity-50 cursor-not-allowed bg-gray-50"
+                : "hover:border-gray-500 cursor-pointer"
+            }
+            ${error ? "border-red-500" : "border-gray-300"}
+            ${isOpen ? "border-blue-500 focus:ring-0.5 ring-blue-500" : ""}
           `}
         >
           <span className="flex items-center gap-2 flex-1 truncate">
             {selectedOption?.icon && (
               <span className="flex-shrink-0">{selectedOption.icon}</span>
             )}
-            <span className={selectedOption ? 'text-gray-900' : 'text-gray-500'}>
+            <span
+              className={selectedOption ? "text-gray-900" : "text-gray-500 text-sm"}
+            >
               {selectedOption?.label || placeholder}
             </span>
           </span>
-          
-          <svg
+
+          <ChevronDown
             className={`w-5 h-5 text-gray-400 transition-transform duration-200 ${
-              isOpen ? 'rotate-180' : ''
+              isOpen ? "rotate-180" : ""
             }`}
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 9l-7 7-7-7"
-            />
-          </svg>
+          />
         </button>
 
         {isOpen && (
-          <div className="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-auto">
+          <div
+            className="absolute z-50 w-full mt-1 bg-white border border-gray-200 
+            rounded-lg shadow-lg max-h-60 overflow-auto"
+          >
             {searchable && (
-              <div className="p-2 border-b border-gray-200 sticky top-0 bg-white">
+              <div className="p-1 border-b border-gray-200 sticky top-0 bg-white">
                 <input
                   type="text"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  placeholder="Buscar..."
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Buscar categoria . . ."
+                  className="w-full px-2 py-1 border  
+                  rounded-md focus:outline-none focus:ring-0.5 
+                  border-gray-300 focus:ring-primary focus:border-primary"
                   autoFocus
                 />
               </div>
@@ -126,29 +127,25 @@ export default function DropdownCustom({
                       onClick={() => handleSelect(option.value)}
                       disabled={option.disabled}
                       className={`
-                        w-full px-4 py-2.5 text-left flex items-center gap-2
+                        w-full px-4 py-1.5 text-left flex items-center gap-2
                         transition-colors duration-150
-                        ${option.disabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-50'}
-                        ${option.value === value ? 'bg-blue-100 text-blue-700 font-medium' : 'text-gray-900'}
+                        ${
+                          option.disabled
+                            ? "opacity-50 cursor-not-allowed"
+                            : "hover:bg-blue-50"
+                        }
+                        ${
+                          option.value === value
+                            ? "bg-blue-100 text-gray-700 font-medium"
+                            : "text-gray-900"
+                        }
                       `}
                     >
                       {option.icon && (
                         <span className="flex-shrink-0">{option.icon}</span>
                       )}
                       <span className="flex-1">{option.label}</span>
-                      {option.value === value && (
-                        <svg
-                          className="w-5 h-5 text-blue-600"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      )}
+                      {option.value === value && <Check />}
                     </button>
                   </li>
                 ))
@@ -158,9 +155,7 @@ export default function DropdownCustom({
         )}
       </div>
 
-      {error && (
-        <p className="mt-1 text-sm text-red-600">{error}</p>
-      )}
+      {error && <p className="mt-1 text-sm text-red-600">{error}</p>}
     </div>
   );
 }
