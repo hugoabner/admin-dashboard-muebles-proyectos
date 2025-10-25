@@ -8,6 +8,11 @@ const protectedRoutes = new Set([
   "/dashboard/clients",
   "/dashboard/services",
   "/dashboard/products",
+  "/dashboard/products/create",
+  "/dashboard/products/edit",
+  "/dashboard/products/list",
+  "/dashboard/products/detail",
+
 ]);
 const publicRoutes = new Set(["/auth/sign-in"]);
 

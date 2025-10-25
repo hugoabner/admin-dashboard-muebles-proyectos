@@ -3,16 +3,18 @@ import {
   Edit2,
   HandPlatter,
   LayoutDashboard,
+  LayoutPanelLeft,
   ListCheck,
   Package,
   Plus,
   Settings,
+  UserRoundCog,
   Users
 } from "lucide-react";
 
 export const SIDEBAR_GROUPS: SidebarGroup[] = [
   {
-    title: "Principal",
+    title: "Menu",
     items: [
       {
         label: "Dashboard",
@@ -41,6 +43,11 @@ export const SIDEBAR_GROUPS: SidebarGroup[] = [
             href: "/dashboard/products/edit",
             icon: Edit2,
           },
+          {
+            label: "Detail",
+            href: "/dashboard/products/detail",
+            icon: LayoutPanelLeft,
+          },
         ],
       },
       {
@@ -60,6 +67,34 @@ export const SIDEBAR_GROUPS: SidebarGroup[] = [
         href: "/dashboard/reservations",
         icon: ListCheck,
         isActive: false,
+      },
+      {
+        label: "Categorias",
+        href: "/dashboard/categories",
+        icon: UserRoundCog,
+        isActive: false,
+         subItems: [
+          {
+            label: "List Categories",
+            href: "/dashboard/categories/list",
+            icon: ListCheck,
+          },
+          {
+            label: "Create",
+            href: "/dashboard/categories/create",
+            icon: Plus,
+          },
+          {
+            label: "Edit",
+            href: "/dashboard/categories/edit",
+            icon: Edit2,
+          },
+          // {
+          //   label: "Detail",
+          //   href: "/dashboard//detail",
+          //   icon: LayoutPanelLeft,
+          // },
+        ],
       },
       {
         label: "Configuración",
