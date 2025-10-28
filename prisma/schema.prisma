@@ -16,16 +16,14 @@ model Client {
   document_type_id  String
   name              String
   full_lastname     String
-  type_document     Int
   document_number   Int
   cell_phone        Int
   birthdate         DateTime?
   email             String           @unique
   password_hash     String
   is_verified       Boolean          @default(false)
-  email_verified    Boolean          @default(false)
   photo_profile_url String?
-  status            Int?
+  is_active         Boolean          @default(true)
   updated_At        DateTime         @updatedAt
   created_At        DateTime         @default(now())
 
@@ -229,4 +227,34 @@ model Admin {
   created_At   DateTime  @default(now())
 
   @@map("admin")
+}
+
+
+// --------------------
+// ENUMS
+// --------------------
+
+enum ClientStatus {
+  ACTIVE
+  SUSPENDED
+  DELETED
+}
+
+enum ProductState {
+  ACTIVE
+  INACTIVE
+  DISCONTINUED
+}
+
+enum ReserveStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+enum NotificationType {
+  EMAIL
+  SMS
+  PUSH
 }
