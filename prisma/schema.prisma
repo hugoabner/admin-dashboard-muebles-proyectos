@@ -1,0 +1,232 @@
+// schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  // ¡Usa la URL Serverless de Neon para tu variable de entorno!
+  url = env("DATABASE_URL") // uses connection pooling
+  // directUrl = env("DATABASE_URL") // uses a 
+}
+
+model Client {
+  client_id         String              @id @default(cuid())
+  document_type_id  String
+  name              String
+  full_lastname     String
+  type_document     Int
+  document_number   Int
+  cell_phone        Int
+  birthdate         DateTime?
+  email             String           @unique
+  password_hash     String
+  is_verified       Boolean          @default(false)
+  email_verified    Boolean          @default(false)
+  photo_profile_url String?
+  status            Int?
+  updated_At        DateTime         @updatedAt
+  created_At        DateTime         @default(now())
+
+  // Relaciones
+  document_type     DocumentType     @relation(fields: [document_type_id], references: [document_type_id])
+  reserves          Reserve[]
+  favorites         Favorite[]
+  carts             Cart[]
+
+  @@map("clients")
+}
+
+model DocumentType {
+  document_type_id  String       @id @default(cuid())
+  name              String
+  clients           Client[]
+}
+
+model Cart {
+  cart_id     String          @id @default(cuid())
+  client_id   String
+  created_At  DateTime     @default(now())
+  updated_At  DateTime     @updatedAt
+
+  client      Client       @relation(fields: [client_id], references: [client_id])
+  cart_detail CartDetail[]
+  
+  @@map("carts")
+}
+
+model CartDetail {
+  cart_detail_id String      @id @default(cuid())
+  cart_id        String
+  product_id     String
+  quantity       Int
+
+  cart           Cart     @relation(fields: [cart_id], references: [cart_id])
+  product        Product  @relation(fields: [product_id], references: [product_id])
+
+  @@map("cart_details")
+}
+
+model Reserve {
+  reserve_id  String        @id @default(cuid())
+  client_id   String
+  product_id  String
+  status      Int
+  notes       String?
+  created_At  DateTime   @default(now())
+  updated_At  DateTime   @updatedAt
+
+  client      Client     @relation(fields: [client_id], references: [client_id])
+  product     Product    @relation(fields: [product_id], references: [product_id])
+  logs        NotificationLog[]
+
+  @@map("reserves")
+}
+
+model Favorite {
+  id_favorite String      @id @default(cuid())
+  product_id  String
+  client_id   String
+  created_At  DateTime @default(now())
+  updated_At  DateTime @updatedAt
+
+  product     Product  @relation(fields: [product_id], references: [product_id])
+  client      Client   @relation(fields: [client_id], references: [client_id])
+
+  @@map("favorites")
+}
+
+model NotificationLog {
+  notification_logs_id String       @id @default(cuid())
+  reserve_id           String
+  message              String
+  channel              String
+  type                 Int
+  success              Boolean   @default(false)
+  created_At           DateTime  @default(now())
+  updated_At           DateTime  @updatedAt
+
+  reserve              Reserve   @relation(fields: [reserve_id], references: [reserve_id])
+
+  @@map("notifications")
+}
+
+model Product {
+  product_id         String                @id @default(cuid())
+  category_product_id String
+  name               String
+  description        String
+  price              Decimal            @db.Decimal(10,2)
+  stock              Int
+  state              Int
+  color              String?
+  finish             String?
+  popular            Boolean            @default(false)
+  available          Boolean            @default(true)
+  width_cm           Int?
+  depth_cm           Int?
+  height_cm          Int?
+  updated_At         DateTime           @updatedAt
+  created_At         DateTime           @default(now())
+
+  // Relaciones
+  category_product   CategoryProduct    @relation(fields: [category_product_id], references: [category_product_id])
+  product_images     ProductImage[]
+  favorites          Favorite[]
+  cart_details       CartDetail[]
+  reserves           Reserve[]
+  tags               ProductTagsXref[]
+
+  @@map("products")
+}
+
+model CategoryProduct {
+  category_product_id String             @id @default(cuid())
+  name                String
+  description         String?
+  parent_id           String?
+  category_image_url  String?
+  created_At          DateTime         @default(now())
+  updated_At          DateTime         @updatedAt
+
+  products            Product[]
+
+  @@map("category_products")
+}
+
+
+model ProductImage {
+  product_image_id String       @id @default(cuid())
+  product_id       String
+  image_url        String
+  is_main          Boolean    @default(false)
+  order_image      Int?
+
+  product          Product    @relation(fields: [product_id], references: [product_id])
+
+  @@map("product_images")
+}
+
+
+model Tag {
+  tag_id     String               @id @default(cuid())
+  name_tag   String
+  products   ProductTagsXref[]
+  
+  @@map("tags")
+}
+
+model ProductTagsXref {
+  product_id String
+  tag_id     String
+
+  product Product @relation(fields: [product_id], references: [product_id])
+  tag     Tag     @relation(fields: [tag_id], references: [tag_id])
+
+  @@id([product_id, tag_id])
+
+  @@map("product_tags_xref")
+}
+
+model Service {
+  service_id          String                @id @default(cuid())
+  category_service_id String
+  name                String
+  description         String?
+  service_image_url   String?
+  created_At          DateTime           @default(now())
+  updated_At          DateTime           @updatedAt
+
+  category_service    CategoryService    @relation(fields: [category_service_id], references: [category_service_id])
+
+  @@map("services")
+}
+
+
+model CategoryService {
+  category_service_id String             @id @default(cuid())
+  name                String
+  description         String?
+  parent_id           String?
+  category_service_image_url String?
+  created_At          DateTime        @default(now())
+  updated_At          DateTime        @updatedAt
+
+  services            Service[]
+  
+  @@map("category_service")
+}
+
+model Admin {
+  id_admin     String       @id @default(cuid())
+  username     String    @unique
+  password_hash String
+  full_name    String
+  profile_url  String?
+  phone        Int?
+  updated_At   DateTime  @updatedAt
+  created_At   DateTime  @default(now())
+
+  @@map("admin")
+}
