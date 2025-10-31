@@ -35,20 +35,43 @@ const userData = [
 
 export default function page() {
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center -mt-16">
-      <h1 className="text-4xl font-bold mb-8 font-[family-name:var(--font-geist-sans)] text-[#333333]">
-        Posts
-      </h1>
-      <ul className="font-[family-name:var(--font-geist-sans)] max-w-2xl space-y-4">
-        {userData.map((post) => (
-          <li key={post.id}>
-            <span className="font-semibold">{post.name}</span>
-            <span className="text-sm text-gray-600 ml-2">
-              by {post.email}
-            </span>
-          </li>
-        ))}
-      </ul>
-    </div>
+   <main className="max-w-md mx-auto p-6 space-y-4 text-white">
+      <h1 className="text-2xl font-bold">Sign Up</h1>
+
+      {/* {error && <p className="text-red-500">{error}</p>} */}
+
+      <form 
+        // onSubmit={handleSubmit} 
+        className="space-y-4"
+      >
+        <input
+          name="name"
+          placeholder="Full Name"
+          required
+          className="w-full rounded-md bg-neutral-900 border border-neutral-700 px-3 py-2"
+        />
+        <input
+          name="email"
+          type="email"
+          placeholder="Email"
+          required
+          className="w-full rounded-md bg-neutral-900 border border-neutral-700 px-3 py-2"
+        />
+        <input
+          name="password"
+          type="password"
+          placeholder="Password"
+          required
+          minLength={8}
+          className="w-full rounded-md bg-neutral-900 border border-neutral-700 px-3 py-2"
+        />
+        <button
+          type="submit"
+          className="w-full bg-white text-black font-medium rounded-md px-4 py-2 hover:bg-gray-200"
+        >
+          Create Account
+        </button>
+      </form>
+    </main>
   );
 }

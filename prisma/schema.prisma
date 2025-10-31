@@ -11,16 +11,19 @@ datasource db {
   // directUrl = env("DATABASE_URL") // uses a 
 }
 
+/*
+?: el signo de interrogación indica que el campo es opcional (puede ser NULL en la DB o omitido al crear el registro).
+*/
 /* Entity client*/ 
 model Client {
-  client_id         String              @id @default(cuid())
-  document_type_id  String
-  document_number   Int
+  client_id         String           @id @default(cuid()) // clave primaria 
+  document_type_id  String           // foreng key 
+  document_number   String
   name              String
   full_lastname     String
   cell_phone        Int
   birthdate         DateTime?
-  email             String           @unique
+  email             String           @unique 
   password_hash     String
   is_verified       Boolean          @default(false)
   photo_profile_url String?
@@ -30,9 +33,9 @@ model Client {
 
   // Relaciones
   document_type     DocumentType     @relation(fields: [document_type_id], references: [document_type_id])
-  reserves          Reserve[]
+  reserves          Reserve[]        // un cliente puede tener muchas reservas
   favorites         Favorite[]
-  carts             Cart[]
+  carts             Cart[]  
 
   @@map("clients")
 }
@@ -45,37 +48,41 @@ model DocumentType {
 
 model Cart {
   cart_id     String          @id @default(cuid())
-  client_id   String
+  client_id   String       // clave foranea
   created_At  DateTime     @default(now())
   updated_At  DateTime     @updatedAt
 
   client      Client       @relation(fields: [client_id], references: [client_id])
-  cart_detail CartDetail[]
-  
+  cart_detail CartDetail[]      // relacion 1 : N ( 1 carrito puede tener muchos detalles )
+  cart_detail CartDetail[] @relation(onDelete: Cascade)
   @@map("carts")
 }
 
 model CartDetail {
-  cart_detail_id String      @id @default(cuid())
-  cart_id        String
-  product_id     String
+  cart_detail_id String      @id @default(cuid()) // clave
+  cart_id        String      // clave foranea
+  product_id     String      // clave foranea
   quantity       Int
 
-  cart           Cart     @relation(fields: [cart_id], references: [cart_id])
-  product        Product  @relation(fields: [product_id], references: [product_id])
+  cart           Cart     @relation(fields: [cart_id], references: [cart_id])           // N:1 con Cart
+  product        Product  @relation(fields: [product_id], references: [product_id])     // N:1 con Product
+  // @@unique([cart_id, product_id])
 
   @@map("cart_details")
 }
 
 model Reserve {
-  reserve_id  String        @id @default(cuid())
-  client_id   String
-  product_id  String
+  reserve_id  String     @id @default(cuid()) // clave primaria
+  client_id   String     // clave foranea   
+  product_id  String     // clave foranea
   status      Int
   notes       String?
   created_At  DateTime   @default(now())
   updated_At  DateTime   @updatedAt
 
+  /* 
+    aqui se especifica que en el campo client_id de la entidad Reserve se guardara el client_id de la entidad Client 
+  */
   client      Client     @relation(fields: [client_id], references: [client_id])
   product     Product    @relation(fields: [product_id], references: [product_id])
   logs        NotificationLog[]
